@@ -1,7 +1,6 @@
 #include "lib_package.h"
 #include <cstdio>
 #include <cstdlib>
-#include "lib_package.h"
 size_t getfs(const char * url)
 {
     FILE * fp=fopen(url,"r+b");
