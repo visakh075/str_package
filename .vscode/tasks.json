@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "t_bin/strlist > result",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Build All",
+            "type": "shell",
+            "command": "make all",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Build Tests",
+            "type": "shell",
+            "command": "make tests",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Build Libs",
+            "type": "shell",
+            "command": "make libs",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Build Clean",
+            "type": "shell",
+            "command": "make clean",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Clean and build",
+            "type": "shell",
+            "command": "make clean && make all",
+            "problemMatcher": [],
+            "group": "build"
+        },
+    ]
+}
