@@ -1,0 +1,10 @@
+bin/*
+obj/*
+t_bin/*
+read_me.txt
+strlist_map.log
+test_results.log
+result.log
+build.log
+*.log
+ignore*

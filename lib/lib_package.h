@@ -1,13 +1,14 @@
-#ifndef __LIB_STR_PACK__
-#define __LIB_STR_PACK__
+#pragma once
 #include <cstdio>
-class package
-{
-    public:
-    package(char *);
-    ~package();
-    char * path;
+#include <stdlib.h>
+#include "lib_strlist.h"
+typedef unsigned char bytes;
+size_t getfs(char * filename);
+class package{
+	public:
+	package(char *);
+	void read();
+	strlist packet_list;
+	int tag_list_count=0;
 
 };
-size_t getfs(const char *);
-#endif
