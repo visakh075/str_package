@@ -8,9 +8,13 @@ class c_package{
 	public:
 	c_package(char *);
 	void read(char *);
-	strlist packet_list;
-	int tag_list_count=0;
+	strlist tag_list;
+	int tag_list_len;
 	void map(int from,int to,int p);
+	// maped functions
+	void search(char *);
+	int compare(uint idx1,uint idx2);
+	void show();
 
 };
 typedef class c_package package;

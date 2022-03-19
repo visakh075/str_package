@@ -94,7 +94,7 @@ typedef struct
 class strlist_c{
 	public:
 		item_c * head ,* tail;
-		uint ListCount;
+		uint len;
 		strlist_c();
 		~strlist_c();
 		void push(const char *);
@@ -104,8 +104,7 @@ class strlist_c{
 		item_c * getI(uint index);
 		item_c * operator [] (uint index);
         void search(char *);
-        int compare(uint idx1,uint idx2);
-        
+        int compare(uint idx1,uint idx2);    
 };
 typedef class strlist_c strlist; 
 uint strlen(const char *);

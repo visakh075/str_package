@@ -160,8 +160,6 @@ void item::crunch()
 			chksum.list[chksum.len-1]=tmpChkSum;
 			tmpChkSum=0;
 		}
-
-
 	}
 	
 }
@@ -177,13 +175,12 @@ strlist::strlist_c()
 	tail=(item *)malloc(sizeof(item));
 	LOG_STR("memmory allocation tail");
 	
-	ListCount=0;
+	len=0;
 	//search_results=(item **)malloc(sizeof(item *));
 }
 strlist::~strlist_c()
 {
-	
-	if (ListCount<3)
+	if (len<3)
 	{
 		//free(head->loc);free(tail->loc);
 		tail->~item_c();
@@ -214,19 +211,19 @@ void strlist::probe()
 void strlist::push(const char * _str)
 {
 	
-	if(ListCount==0)
+	if(len==0)
 	{
 		head->set(_str);
 		head->in=nullptr;
 		head->out=nullptr;
-		ListCount=1;
+		len=1;
 	}
-	else if(ListCount==1)
+	else if(len==1)
 	{
 		tail->set(_str);
 		head->con_tail(tail);
 		tail->out=nullptr;
-		ListCount=2;
+		len=2;
 	}
 	else
 	{
@@ -236,18 +233,18 @@ void strlist::push(const char * _str)
 		temp->set(_str);
 		tail->con_tail(temp);
 		tail=temp;
-		ListCount++;
+		len++;
 	}
 	
 }
 void strlist::show()
 {
 	
-	if(ListCount==0)
+	if(len==0)
 	{
 
 	}
-	else if(ListCount==1)
+	else if(len==1)
 	{
 		head->probe();
 	}
@@ -265,7 +262,7 @@ void strlist::show()
 item * strlist::get(uint idx)
 {
 	if(idx==0) return head;
-	else if(idx>0 && idx<=ListCount)
+	else if(idx>0 && idx<=len)
 	{
 		uint count=0;
 		item * temp;
@@ -282,7 +279,7 @@ item * strlist::get(uint idx)
 item * strlist::getI(uint idx)
 {
 	if(idx==0) return tail;
-	else if(idx>0 && idx<=ListCount)
+	else if(idx>0 && idx<=len)
 	{
 		uint count=0;
 		item * temp;
@@ -309,11 +306,11 @@ void strlist::search(char * srckey)
 	LOG_STR("\nSearch");
 	s_chksum str_chksum=get_chksum(srckey);
 	item * tag;
-	for(uint i=0;i<ListCount;i++)
+	for(uint i=0;i<len;i++)
 	{
-		item * tag=get(i);
+		tag=get(i);
 
-		if(tag->chksum.list[0]==str_chksum.sum && (tag->len=str_chksum.len))
+		if(tag->chksum.list[0]==str_chksum.sum && (tag->len==str_chksum.len))
 		{
 			tag->probe();
 		}

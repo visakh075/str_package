@@ -12,19 +12,16 @@ size_t getfs(const char *filename){
 	return(0);}
 c_package::c_package(char * url)
 {
+	tag_list_len=0;
 	read(url);
-	//packet_list.show();
 }
 void c_package::read(char * url){
+	
 	FILE *handler = fopen(url,"r+b");
-	size_t len_string=0;
 	long temp_len=1;
 	char s;
 	char *temp_word=(char *)malloc(sizeof(char));
 	char t_s='t';
-	//char t_t='o';
-	
-	//init_tag_list();
 
 	while(!feof(handler))
 	{   
@@ -39,10 +36,10 @@ void c_package::read(char * url){
 				if(temp_len>1)
 				{
 					
-					packet_list.push(temp_word);
-					packet_list.getI(0)->flag=t_s;
-					packet_list.getI(0)->path=-1;
-					tag_list_count++;
+					tag_list.push(temp_word);
+					tag_list.getI(0)->flag=t_s;
+					tag_list.getI(0)->path=-1;
+					tag_list_len++;
 					temp_len=1;
 					//free(temp_word);
 					temp_word=(char *)malloc(sizeof(char));
@@ -72,8 +69,7 @@ void c_package::read(char * url){
 				temp_word[temp_len-1]='\0';
 		}
 	}
-	//tag_par_list=(int *)realloc(tag_par_list,tag_list_count*sizeof(int));
-	map(0,tag_list_count-1,-1);
+	map(0,tag_list_len-1,-1);
 }
 void c_package::map(int from,int to,int p)
 {
@@ -89,4 +85,16 @@ void c_package::map(int from,int to,int p)
 	// 		if(compare_tag(f,l)){map(f,l,from);f=l;break;}
 	// 	}
 	// }
+}
+void c_package::search(char * str)
+{
+	tag_list.search(str);
+}
+int c_package::compare(uint idx1,uint idx2)
+{
+	tag_list.compare(idx1,idx2);
+}
+void c_package::show()
+{
+	tag_list.show();
 }

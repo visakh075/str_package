@@ -11,7 +11,7 @@ int main()
 
 
     // printf("\n/ActiveEcuC/ComM : %u(%u) ECUC-REFERENCE-VALUE : %u(%u)\n",strhash("/ActiveEcuC/ComM"),strlen_s("/ActiveEcuC/ComM"),strhash("ECUC-REFERENCE-VALUE"),strlen_s("ECUC-REFERENCE-VALUE"));
-    // str_pack.packet_list.search("ECUC-REFERENCE-VALUE");
+    str_pack.search("ECUC-REFERENCE-VALUE");
     // for(uint x=str_pack.packet_list.ListCount-10;x<str_pack.packet_list.ListCount;x++)
     // {
     //     for(uint y=str_pack.packet_list.ListCount-10;y<str_pack.packet_list.ListCount;y++)
