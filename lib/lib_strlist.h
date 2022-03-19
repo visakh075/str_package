@@ -66,8 +66,6 @@ typedef struct
     uint sum;
     uint len;
 } s_chksum;
-
-
 class item_c{
 	public:
 		char * loc;
@@ -88,13 +86,11 @@ class item_c{
 		void operator = (const char *);
 };
 typedef class item_c item;
-
 typedef struct
 {
     item ** list;
     uint len;
 }search_list;
-
 class strlist_c{
 	public:
 		item_c * head ,* tail;
