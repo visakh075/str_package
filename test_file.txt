@@ -1,0 +1,10 @@
+<AUTOSAR>
+   <AR-PACKAGES>
+      <PACKAGE>
+         <SHORT-NAME>Package1</SHORT-NAME>
+      </PACKAGE>
+      <PACKAGE>
+         <SHORT-NAME>Package2</SHORT-NAME>
+      </PACKAGE>
+   </AR-PACKAGES>
+</AUTOSAR>

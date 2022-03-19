@@ -8,7 +8,7 @@
         "name": "Test Debug Active",
         "type": "lldb",
         "request": "launch",
-        "program": "${workspaceFolder}/t_bin/${fileBasenameNoExtension}",
+        "program": "${workspaceFolder:str_package}/t_bin/${fileBasenameNoExtension}",
         "args": [],
         "stopAtEntry": true,
         "cwd": "${workspaceFolder}",
