@@ -118,7 +118,7 @@ void item::reset(const char * strptr)
 void item::probe()
 {
 	LOG_ITM_PROBE();
-	printf("\np:%p l:%p [i:%p o:%p %3ld %6ld] %s",this,loc,in,out,flag,path,loc);
+	//printf("\np:%p l:%p [i:%p o:%p %3ld %6ld] %s",this,loc,in,out,flag,path,loc);
 }
 void item::con_tail(item * _tail)
 {
@@ -135,7 +135,6 @@ item * item::push(const char * _str)
 	item_c* temp;
 	temp=(item_c *) malloc(sizeof(item));
 	temp->set(_str);
-	
 	out=nullptr;
 	temp->out=this;
 	return temp;
@@ -216,6 +215,7 @@ void strlist::push(const char * _str)
 		head->set(_str);
 		head->in=nullptr;
 		head->out=nullptr;
+		head->index=0;
 		len=1;
 	}
 	else if(len==1)
@@ -223,6 +223,7 @@ void strlist::push(const char * _str)
 		tail->set(_str);
 		head->con_tail(tail);
 		tail->out=nullptr;
+		tail->index=1;
 		len=2;
 	}
 	else
@@ -233,13 +234,14 @@ void strlist::push(const char * _str)
 		temp->set(_str);
 		tail->con_tail(temp);
 		tail=temp;
+		tail->index=len;
 		len++;
 	}
 	
 }
 void strlist::show()
 {
-	
+	// uint idx=0;
 	if(len==0)
 	{
 
@@ -247,9 +249,11 @@ void strlist::show()
 	else if(len==1)
 	{
 		head->probe();
+		//idx=1;
 	}
 	else
 	{
+		// idx++;
 		item * temp=nullptr;
 		temp=head;
 		while(temp!=nullptr)
@@ -278,7 +282,12 @@ item * strlist::get(uint idx)
 }
 item * strlist::getI(uint idx)
 {
-	if(idx==0) return tail;
+	if(idx==0 && len==1)
+	{
+		return head;
+	}
+	else if(idx==0) return tail;
+
 	else if(idx>0 && idx<=len)
 	{
 		uint count=0;
@@ -295,7 +304,7 @@ item * strlist::getI(uint idx)
 }
 item * strlist::operator[] (uint index)
 {
-	return getI(index);
+	return get(index);
 }
 void item::operator = (const char * strptr)
 {
@@ -316,7 +325,7 @@ void strlist::search(char * srckey)
 		}
 	}
 }
-int strlist::compare(uint x,uint y)
+bool strlist::compare(uint x,uint y)
 {
 	item * strx=get(x);
 	item * stry=get(y);
@@ -325,11 +334,11 @@ int strlist::compare(uint x,uint y)
 	{
 		if(strx->chksum.list[0]==stry->chksum.list[0])
 		{
-			return 1;
+			return true;
 		}
 		else
 		{
-			return 0;
+			return false;
 		}
 	}
 

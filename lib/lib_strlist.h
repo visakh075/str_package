@@ -7,7 +7,12 @@
     Search list
     search by index
      build a compare function which will compare the check sums
+
+
+     add a new class int_stack to maintain the search 
+     conceptuilize
 */
+#include <stdbool.h>
 #ifndef __STRLIST__
 #define __STRLIST__
 
@@ -30,11 +35,15 @@
             sprintf(buff,"item < : %p %p %s",this,loc,loc);\
             map<<buff;\
         }
-        #define LOG_ITM_PROBE() {\
-            sprintf(buff,"\nitem > : %p %p %3ld %6ld  %s ",this,loc,flag,path,loc);\
+        #define LOG_ITM_PROBE_DET() {\
+            sprintf(buff,"\nitem > : [%u] %p %p %3ld %6ld  %s ",index,this,loc,flag,path,loc);\
             map<<buff;\
             sprintf(buff,"chksum :");map+buff;\
             for(uint i=0;i<chksum.len;i++){sprintf(buff," %u",chksum.list[i]);map+buff;}\
+        }
+        #define LOG_ITM_PROBE() {\
+            sprintf(buff,"item > : [%u] %3ld %6ld  %s ",index,flag,path,loc);\
+            map<<buff;\
         }
         #define LOG_ITM_DEST() {\
             sprintf(buff,"item ~ : %p %p %3ld %6ld  %s ",this,loc,flag,path,loc);\
@@ -70,6 +79,7 @@ class item_c{
 	public:
 		char * loc;
 		uint len;
+        uint index;
         s_chksum_list chksum;
         void crunch();
         long int flag,path;
@@ -104,7 +114,8 @@ class strlist_c{
 		item_c * getI(uint index);
 		item_c * operator [] (uint index);
         void search(char *);
-        int compare(uint idx1,uint idx2);    
+        bool compare(uint idx1,uint idx2);
+
 };
 typedef class strlist_c strlist; 
 uint strlen(const char *);

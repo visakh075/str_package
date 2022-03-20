@@ -13,7 +13,7 @@ class c_package{
 	void map(int from,int to,int p);
 	// maped functions
 	void search(char *);
-	int compare(uint idx1,uint idx2);
+	bool compare(uint idx1,uint idx2);
 	void show();
 
 };

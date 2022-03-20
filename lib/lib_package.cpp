@@ -70,29 +70,51 @@ void c_package::read(char * url){
 		}
 	}
 	map(0,tag_list_len-1,-1);
+	show();
 }
 void c_package::map(int from,int to,int p)
 {
+	printf("map [%d,%d->%d]\n",from,to,p);fflush(stdout);
 	// tag_par_list[from]=p;
-	// for(int f=from+1;f<=to;f++) tag_par_list[f]=from;
+	//tag_list[from]->path=p;
 
-	// for(int f=from+1;f<to;f++)
-	// {
-	// 	if(tag_flag_list[f]!='o') continue;
-	// 	for(int l=f;l<to;l++)
-	// 	{
-	// 		if(tag_flag_list[l]!='c') continue;
-	// 		if(compare_tag(f,l)){map(f,l,from);f=l;break;}
-	// 	}
-	// }
+	for(int f=from;f<=to;f++) tag_list[f]->path=p;
+	// fring case the closing tag also
+	for(int f=from;f<=to;f++)
+	{
+		// neglect all tags that are not open
+		if(tag_list[f]->flag=='o')
+		{
+			//  selected open tag
+
+			for(int l=f+1;l<=to;l++)
+			{
+				// select only closing tags
+				if(tag_list[l]->flag=='c')
+				{
+					// slected a closing tag
+					if(compare(f,l))
+					{
+						// printf("\n(%d,%d,%s,%s)",f,l,tag_list[f]->loc,tag_list[l]->loc);fflush(stdout);
+					
+						map(f+1,l-1,f);
+						// maping or closing tag
+						tag_list[l]->path=f;
+						f=l;
+						break; // break out from loop of l
+					}
+				}
+			}
+		}
+	}
 }
 void c_package::search(char * str)
 {
 	tag_list.search(str);
 }
-int c_package::compare(uint idx1,uint idx2)
+bool c_package::compare(uint idx1,uint idx2)
 {
-	tag_list.compare(idx1,idx2);
+	return tag_list.compare(idx1,idx2);
 }
 void c_package::show()
 {

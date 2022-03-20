@@ -1,0 +1,14 @@
+0 : <AUTOSAR>
+1 :   <AR-PACKAGES>
+2 :      <PACKAGE>
+3 :         <SHORT-NAME>
+4 :            Package1
+5 :         </SHORT-NAME>
+6 :      </PACKAGE>
+7 :      <PACKAGE>
+8 :         <SHORT-NAME>
+9 :             Package2
+10 :        </SHORT-NAME>
+11 :     </PACKAGE>
+12 :   </AR-PACKAGES>
+13 :  </AUTOSAR>
