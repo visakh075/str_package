@@ -1,0 +1,28 @@
+maping is too slow
+
+create one time pass mapping
+adapt it to searcching if possible
+
+make a que
+
+for i in range(len)
+{
+    // dont use get(i); its slow
+    if(tag[i]=='o')
+    {
+        // open type add to que
+        que.push(i)
+    }
+    else if(tag[i]=='c')
+    {
+        // close
+        if(compare(tag[i],que.last))
+        {
+            // found closing tag
+
+            // mark the childs
+            // if not marked already
+            from que.last +1 to i [should include i]
+        }
+    }
+}

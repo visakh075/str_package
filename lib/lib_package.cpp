@@ -70,14 +70,12 @@ void c_package::read(char * url){
 		}
 	}
 	map(0,tag_list_len-1,-1);
+	printf("comp : %u",cmp);
 	show();
 }
 void c_package::map(int from,int to,int p)
 {
-	printf("map [%d,%d->%d]\n",from,to,p);fflush(stdout);
-	// tag_par_list[from]=p;
-	//tag_list[from]->path=p;
-
+	
 	for(int f=from;f<=to;f++) tag_list[f]->path=p;
 	// fring case the closing tag also
 	for(int f=from;f<=to;f++)
@@ -92,6 +90,7 @@ void c_package::map(int from,int to,int p)
 				// select only closing tags
 				if(tag_list[l]->flag=='c')
 				{
+					cmp++;
 					// slected a closing tag
 					if(compare(f,l))
 					{

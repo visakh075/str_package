@@ -16,5 +16,11 @@ class c_package{
 	bool compare(uint idx1,uint idx2);
 	void show();
 
+	private:
+	strlist * que;
+
+	// status
+	uint cmp;
+
 };
 typedef class c_package package;
