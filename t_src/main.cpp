@@ -4,9 +4,9 @@
 int main()
 {
     // const char * file="/Users/erkattiri/Desktop/Lab/str_package/test_file.txt";
-    // const char * file="/Users/erkattiri/Desktop/Lab/str_package/MyECU.ecuc.arxml.txt";
+    const char * file="/Users/erkattiri/Desktop/Lab/str_package/MyECU.ecuc.arxml.txt";
     
-    const char * file="/Users/erkattiri/Desktop/Lab/str_package/visakh.html";
+    // const char * file="/Users/erkattiri/Desktop/Lab/str_package/visakh.html";
 
     printf("%lu\n",getfs(file));
     package str_pack=package((char*)file);

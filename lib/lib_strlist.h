@@ -13,6 +13,7 @@
      conceptuilize
 */
 #include <stdbool.h>
+#include <inttypes.h>
 #ifndef __STRLIST__
 #define __STRLIST__
 
@@ -36,13 +37,17 @@
             map<<buff;\
         }
         #define LOG_ITM_PROBE_DET() {\
-            sprintf(buff,"\nitem > : [%u] %p %p %3ld %6ld  %s ",index,this,loc,flag,path,loc);\
-            map<<buff;\
+            sprintf(buff,"\nitem > : %s ",loc);map<<buff;\
+            sprintf(buff,"idx : [%u]\n",index);map+buff;\
+            sprintf(buff,"pos : (%u,%u)\n",position.line,position.col);map+buff;\
+            sprintf(buff,"type : %c parent : %d\n",flag,path);map+buff;\
+            sprintf(buff,"head end : %d\n",chksum.head_end);map+buff;\
             sprintf(buff,"chksum :");map+buff;\
             for(uint i=0;i<chksum.len;i++){sprintf(buff," %u",chksum.list[i]);map+buff;}\
+            LOG_STR("");\
         }
         #define LOG_ITM_PROBE() {\
-            sprintf(buff,"item > : [%u] %3ld %6ld  %s ",index,flag,path,loc);\
+            sprintf(buff,"item > : [%u] (%u,%u) %3ld %6ld  %s ",index,position.line,position.col,flag,path,loc);\
             map<<buff;\
         }
         #define LOG_ITM_DEST() {\
@@ -61,9 +66,15 @@
 
     #endif
 //  DEBUG <<
-
+typedef long int lint;
 typedef unsigned int uint;
-
+typedef uint32_t u32;
+typedef unsigned char uchar;
+typedef struct
+{
+	u32 line;
+	u32 col;
+}pos;
 typedef struct
 {
     uint * list;
@@ -75,14 +86,18 @@ typedef struct
     uint sum;
     uint len;
 } s_chksum;
+
+
 class item_c{
 	public:
 		char * loc;
 		uint len;
-        uint index;
+        u32 index;
         s_chksum_list chksum;
+        pos position;
         void crunch();
-        long int flag,path;
+        unsigned char flag;
+        u32 path;
 		item_c *in ,*out;
 		item_c();
 		item_c(const char *);
@@ -101,21 +116,21 @@ typedef struct
     item ** list;
     uint len;
 }search_list;
+
 class strlist_c{
 	public:
 		item_c * head ,* tail;
-		uint len;
+		u32 len;
 		strlist_c();
 		~strlist_c();
 		void push(const char *);
 		void probe();
 		void show();
-		item_c * get(uint index);
-		item_c * getI(uint index);
-		item_c * operator [] (uint index);
+		item_c * get(u32 index);
+		item_c * getI(u32 index);
+		item_c * operator [] (u32 index);
         void search(char *);
-        bool compare(uint idx1,uint idx2);
-
+        bool compare(u32 idx1,u32 idx2);
 };
 typedef class strlist_c strlist; 
 uint strlen(const char *);

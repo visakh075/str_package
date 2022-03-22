@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "lib_rtlog.h"
 #include <cstddef>
+#include <inttypes.h>
 
 //	DEBUG >>>
 	// Definition
@@ -83,7 +84,7 @@ item::item_c()
 }
 item::~item_c()
 {
-	LOG_ITM_DEST();
+	//LOG_ITM_DEST();
 	free(loc);
 	in=nullptr;
 	out=nullptr;
@@ -105,7 +106,7 @@ void item::set(const char * strptr)
 		LOG_STR("memmory re-allocation error");
 	}
 	crunch();
-	LOG_ITM_SET();
+	//LOG_ITM_SET();
 }
 void item::reset(const char * strptr)
 {
@@ -117,7 +118,7 @@ void item::reset(const char * strptr)
 }
 void item::probe()
 {
-	LOG_ITM_PROBE();
+	LOG_ITM_PROBE_DET();
 	//printf("\np:%p l:%p [i:%p o:%p %3ld %6ld] %s",this,loc,in,out,flag,path,loc);
 }
 void item::con_tail(item * _tail)
@@ -145,22 +146,28 @@ void item::crunch()
 	chksum.list=(uint *)malloc(sizeof(uint));
 	chksum.len=0;
 	uint tmpChkSum=0;
-	char s;
+	uchar s;
 	for(uint idx=0;idx<len;idx++)
 	{
+
 		s=loc[idx];
+		if(s!=' ' && s!='\0')
+		{tmpChkSum=tmpChkSum+0x10*loc[idx];}
 
-			tmpChkSum=tmpChkSum+0x10*loc[idx];
-
-		if(s==' ' || idx==len-1)
+		else
 		{
 			if(chksum.len==0)chksum.head_end=idx;
+
 			chksum.list=(uint *)realloc(chksum.list,++chksum.len);
 			chksum.list[chksum.len-1]=tmpChkSum;
 			tmpChkSum=0;
+			
 		}
 	}
-	
+	if(chksum.len==0)chksum.head_end=len;
+	chksum.list=(uint *)realloc(chksum.list,++chksum.len);
+	chksum.list[chksum.len-1]=tmpChkSum;
+	tmpChkSum=0;
 }
 // ITEM <<<
 
@@ -263,7 +270,7 @@ void strlist::show()
 		}
 	}
 }
-item * strlist::get(uint idx)
+item * strlist::get(u32 idx)
 {
 	if(idx==0) return head;
 	else if(idx>0 && idx<=len)
@@ -280,7 +287,7 @@ item * strlist::get(uint idx)
 	}
 	return nullptr;
 }
-item * strlist::getI(uint idx)
+item * strlist::getI(u32 idx)
 {
 	if(idx==0 && len==1)
 	{
@@ -302,7 +309,7 @@ item * strlist::getI(uint idx)
 	}
 	return nullptr;
 }
-item * strlist::operator[] (uint index)
+item * strlist::operator[] (u32 index)
 {
 	return get(index);
 }
@@ -315,7 +322,7 @@ void strlist::search(char * srckey)
 	LOG_STR("\nSearch");
 	s_chksum str_chksum=get_chksum(srckey);
 	item * tag;
-	for(uint i=0;i<len;i++)
+	for(u32 i=0;i<len;i++)
 	{
 		tag=get(i);
 
@@ -325,7 +332,7 @@ void strlist::search(char * srckey)
 		}
 	}
 }
-bool strlist::compare(uint x,uint y)
+bool strlist::compare(u32 x,u32 y)
 {
 	item * strx=get(x);
 	item * stry=get(y);
@@ -341,6 +348,6 @@ bool strlist::compare(uint x,uint y)
 			return false;
 		}
 	}
-
+	return false;
 }
 // STRLIST <<<

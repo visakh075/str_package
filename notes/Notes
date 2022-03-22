@@ -26,3 +26,16 @@ for i in range(len)
         }
     }
 }
+item > : ECUC-MODULE-CONFIGURATION-VALUES 
+idx : [14323]
+pos : (7960,0)
+type : c parent : -1
+head end : 32
+chksum : 37200
+
+item > : ECUC-MODULE-CONFIGURATION-VALUES UUID="6b204d77-f2c1-4b32-a888-925d57739e02" 
+idx : [6378]
+pos : (3413,0)
+type : o parent : -1
+head end : 32
+chksum : 37200 42848
