@@ -39,8 +39,8 @@ void c_package::read(char * url){
 				{
 					
 					tag_list.push((const char *)temp_word);
-
-					tag_list.getI(0)->flag=t_s;
+					
+					tag_list.getI(0)->flag=(temp_word[temp_len-2]=='/')?'v' : t_s;
 					tag_list.getI(0)->path=-1;
 					tag_list.getI(0)->position=position;
 					tag_list.getI(0)->position.col=position.col-temp_len;

@@ -39,3 +39,8 @@ pos : (3413,0)
 type : o parent : -1
 head end : 32
 chksum : 37200 42848
+
+due to special case of unclosed tags such as <a/> consider them as values
+
+
+worked generalise using chars
