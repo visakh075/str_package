@@ -44,3 +44,10 @@ due to special case of unclosed tags such as <a/> consider them as values
 
 
 worked generalise using chars
+
+frige 
+'<' '>'
+close
+'/'
+special
+'?'

@@ -33,11 +33,9 @@ void c_package::read(char * url){
 		{
 			case '<':
 			case '>':
-				//t_s=~t_s;
 				
 				if(temp_len>1)
-				{
-					
+				{					
 					tag_list.push((const char *)temp_word);
 					
 					tag_list.getI(0)->flag=(temp_word[temp_len-2]=='/')?'v' : t_s;
@@ -50,9 +48,7 @@ void c_package::read(char * url){
 					free(temp_word);
 					temp_word=NULL;
 					temp_word=(char *)malloc(sizeof(char));
-					//temp_word[1]='\0';
 					
-					//t_='o';
 				}
 				t_s=(s=='>') ? 'v':'t';
 				position.col++;
@@ -80,18 +76,14 @@ void c_package::read(char * url){
 	}
 	show();
 	map();
-	//printf("comp : %u",cmp);
-	//show();
 }
 void c_package::map()
 {
 	u32 cnt = 0;
 	item * tmp=tag_list.head;
-	//LOG_STR("Mapping");
 	while(tmp!=NULL)
 	{
 		cnt++;
-		//tmp->probe();
 		uchar type=tmp->flag;
 		if(type=='o')
 		{
@@ -105,12 +97,7 @@ void c_package::map()
 			{
 				if(tmp->chksum.head_end==que.last->chksum.head_end)
 				{
-					// its closing tag
-					// printf("\n(%ld %ld) %s ->(%u %u)",que.last->position.line,que.last->position.col,tmp->loc,que.last->index,tmp->index);
-					//printf("\nque > %s (c %d)",que.last->loc,que.len);fflush(stdout);
 					que.pop();
-					//printf("\nque * %s (c %d)",que.last->loc,que.len);fflush(stdout);
-
 				}
 			}
 		}
@@ -120,42 +107,10 @@ void c_package::map()
 	
 	printf("\nremaining %d %d",que.len,cnt);
 
-
-
 	for(int i=0;i<que.len;i++)
 	{
 		printf("\nidx:%d flg:%c chk:%u line:%u %s",que.list[i]->index,que.list[i]->flag,que.list[i]->chksum.list[0],que.list[i]->position.line,que.list[i]->loc);
 	}
-	// for(int f=from;f<=to;f++) tag_list[f]->path=p;
-	// // fring case the closing tag also
-	// for(int f=from;f<=to;f++)
-	// {
-	// 	// neglect all tags that are not open
-	// 	if(tag_list[f]->flag=='o')
-	// 	{
-	// 		//  selected open tag
-
-	// 		for(int l=f+1;l<=to;l++)
-	// 		{
-	// 			// select only closing tags
-	// 			if(tag_list[l]->flag=='c')
-	// 			{
-	// 				cmp++;
-	// 				// slected a closing tag
-	// 				if(compare(f,l))
-	// 				{
-	// 					// printf("\n(%d,%d,%s,%s)",f,l,tag_list[f]->loc,tag_list[l]->loc);fflush(stdout);
-					
-	// 					map(f+1,l-1,f);
-	// 					// maping or closing tag
-	// 					tag_list[l]->path=f;
-	// 					f=l;
-	// 					break; // break out from loop of l
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 void c_package::search(char * str)
 {

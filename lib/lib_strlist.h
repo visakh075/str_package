@@ -55,9 +55,8 @@
             map<<buff;\
         }
     #else
-        #define LOG()
         // Wrappper
-        
+        #define LOG()
         #define LOG_STR(x)
         #define LOG_ITM_INIT()
         #define LOG_ITM_SET()

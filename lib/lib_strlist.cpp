@@ -30,7 +30,6 @@ uint strlen_s(char * strptr)
 		if(strptr[retVal]==' ')break;
 		retVal++;
 	}
-	//while(*strptr++!=' ')retVal++;
 	return retVal;
 }
 void strcpy(const char * frm,char * to)
@@ -50,7 +49,6 @@ s_chksum get_chksum(char * str)
 }
 uint strcmp_head(char * strx,char *stry)
 {
-
 	return 0;
 }
 // EXTRA <<<
