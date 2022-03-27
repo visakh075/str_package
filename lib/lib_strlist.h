@@ -86,7 +86,6 @@ typedef struct
     uint len;
 } s_chksum;
 
-
 class item_c{
 	public:
 		char * loc;

@@ -24,8 +24,8 @@ uint strlen(const char * strptr)
 uint strlen_s(char * strptr)
 {
 	uint retVal=0;
-	uint maxlen=strlen(strptr);
-	while(retVal<maxlen)
+	uint MaxLen=strlen(strptr);
+	while(retVal<MaxLen)
 	{
 		if(strptr[retVal]==' ')break;
 		retVal++;
@@ -214,7 +214,6 @@ void strlist::probe()
 }
 void strlist::push(const char * _str)
 {
-	
 	if(len==0)
 	{
 		head->set(_str);
@@ -242,11 +241,9 @@ void strlist::push(const char * _str)
 		tail->index=len;
 		len++;
 	}
-	
 }
 void strlist::show()
 {
-	// uint idx=0;
 	if(len==0)
 	{
 
@@ -254,11 +251,9 @@ void strlist::show()
 	else if(len==1)
 	{
 		head->probe();
-		//idx=1;
 	}
 	else
 	{
-		// idx++;
 		item * temp=nullptr;
 		temp=head;
 		while(temp!=nullptr)

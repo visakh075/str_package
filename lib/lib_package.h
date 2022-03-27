@@ -1,12 +1,17 @@
-#pragma once
+#ifndef __STR_PACK_HEAD
+#define __STR_PACK_HEAD
 #include <cstdio>
 #include <stdlib.h>
 #include "lib_strlist.h"
+#include "lib_rtlog.h"
 #include <inttypes.h>
 typedef unsigned char bytes;
 typedef long int lint;
 typedef uint32_t u32;
 size_t getfs(const char * filename);
+
+// DEBUG >>
+// DEBUG <<
 typedef class que_c
 {
 	public:
@@ -43,3 +48,4 @@ class c_package{
 
 };
 typedef class c_package package;
+#endif

@@ -1,7 +1,28 @@
-#include "lib_package.h"
 #include <cstdio>
 #include <stdlib.h>
 #include "lib_strlist.h"
+#include "lib_rtlog.h"
+#include "lib_package.h"
+#if(LOG_ENSY==1)
+rtlog que_map=rtlog("que_map.log",NORMAL);
+char que_buff_t[LOG_BUFF_SZ];
+	#define Q_LOG() que_map << que_buff_t
+	// Wrappper
+	#define Q_LOG_STR(x) ({que_map<<x;})
+	#define Q_LOG_PUSH() {\
+		sprintf(que_buff_t,"que * : %d %s",len-1,last->loc);\
+		que_map<<que_buff_t;\
+	}
+	#define Q_LOG_ITM_DEST() {\
+		sprintf(que_buff_t,"que > : %d %s",len-1,last->loc);\
+		que_map<<que_buff_t;\
+	}	
+#else
+	#define Q_LOG()
+	#define Q_LOG_STR(x)
+	#define Q_LOG_ITM_DEST()
+	
+#endif
 size_t getfs(const char *filename){
 	FILE *fp;
 	fp=fopen(filename,"rb");
@@ -130,10 +151,11 @@ void que_c::push(item* ptr)
 	list=(item **)realloc(list,len*sizeof(item*));
 	list[len-1]=ptr;
 	last=list[len-1];
+	Q_LOG_PUSH();
 }
 void que_c::pop()
 {
-	printf("\nque * : %s",last->loc);
+	Q_LOG_ITM_DEST();
 	list[len-1]=NULL;
 	len--;
 	list=(item **)realloc(list,len*sizeof(item*));
