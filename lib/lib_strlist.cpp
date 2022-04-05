@@ -15,6 +15,8 @@
 //	DEBUG <<<
 
 // EXTRA >>>
+namespace gen
+{
 uint strlen(const char * strptr)
 {
 	uint retVal=0;
@@ -36,11 +38,12 @@ void strcpy(const char * frm,char * to)
 {
 	while((*to++=*frm++)){};
 }
+}
 s_chksum get_chksum(char * str)
 {
 	s_chksum retVal;
 	retVal.sum=0;
-	retVal.len=strlen(str);
+	retVal.len=gen::strlen(str);
 	for(uint idx=0;idx<retVal.len;idx++)
 	{
 		retVal.sum=retVal.sum+str[idx]*0x10;
@@ -92,12 +95,12 @@ void item::set(const char * strptr)
 {
 	loc=nullptr;
 	
-	loc=(char *)realloc(loc,sizeof(char)*strlen(strptr)+1);
+	loc=(char *)realloc(loc,sizeof(char)*gen::strlen(strptr)+1);
 	
 	if(loc!=nullptr)
 	{
-		strcpy(strptr,loc);
-		len=strlen(strptr);
+		gen::strcpy(strptr,loc);
+		len=gen::strlen(strptr);
 	}
 	else
 	{
